@@ -4,6 +4,7 @@
 /*Zero, positive,negative*/
 
 /*
+ *main - Entry point
  *This is the main function that assigns a random number to the variable 'n'
  *and prints whether the number is positive, negative, or zero.
  *
