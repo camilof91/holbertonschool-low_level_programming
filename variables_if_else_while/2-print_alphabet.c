@@ -1,7 +1,6 @@
 #include <stdio.h>
 /**
-*
-*This main display the alphabet
+*This main display the alphabet on lowercase
 *
 *
 *
