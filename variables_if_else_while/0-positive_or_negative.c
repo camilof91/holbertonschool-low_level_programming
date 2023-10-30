@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 /*Zero, positive,negative*/
-
 /*
  *main - Entry point
  *This is the main function that assigns a random number to the variable 'n'
