@@ -4,8 +4,8 @@
 #include <stdio.h>
 /**
 *Description: This is the main function that prints the alphabet.
-* Return: Always returns 0 for successful execution.
-*return 0 successful
+*Return: Always returns 0 for successful execution.
+*
 */
 int main(void)
 {
