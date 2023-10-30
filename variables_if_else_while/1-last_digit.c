@@ -18,25 +18,18 @@ int main(void)
   srand(time(0));
   n = rand() - RAND_MAX / 2;
   num = n;
-  if (num < 0)
+  int aux = num % 10;
+  if (aux < 6 && aux != 0)
     {
-      num = n * -1;
+      printf("Last digit of %d is %d and is less than 6 and not 0\n", n , aux);
     }
-  else
+  else if(aux > 5)
     {
-      int aux = num % 10;
-      if (aux < 6 && aux != 0)
-	{
-	  printf("Last digit of %d is %d and is less than 6 and not 0\n", n , aux);
-	}
-      else if(aux > 5)
-	{
-	  printf("Last digit of %d is %d and is greater than 5\n", n , aux);
-	}
-      else if(aux == 0)
-	{
-	  printf("Last digit of %d is %d and is 0\n", n , aux);
-	}
+      printf("Last digit of %d is %d and is greater than 5\n", n , aux);
+    }
+  else if(aux == 0)
+    {
+      printf("Last digit of %d is %d and is 0\n", n , aux);
     }
     return (0);
 }
