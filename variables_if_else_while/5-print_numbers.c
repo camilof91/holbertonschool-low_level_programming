@@ -3,7 +3,7 @@
 /**
 *main - Entry point
 *
-*Description: This is the main function that prints 
+*Description: This is the main function that prints
 *the firts ten numbers from 0 to 9.
 *Return: Always returns 0 for successful execution.
 *
