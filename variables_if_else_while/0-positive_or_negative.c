@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/*Zero, positive,negative*/
-/*
- *main - Entry point
- *This is the main function that assigns a random number to the variable 'n'
- *and prints whether the number is positive, negative, or zero.
+/**
+ * main - Entry point for the program
  *
- *Return: Always 0 (Success)
-*/
+ * Description: This program assigns a random number to the variable 'n' and
+ * determines whether the number is positive, negative, or zero. It then
+ * prints the result to the standard output.
+ *
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
 int n;
