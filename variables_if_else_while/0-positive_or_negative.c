@@ -4,9 +4,10 @@
 /*Zero, positive,negative*/
 
 /*
- *Desctription of funtion main
- *This program shows you whether the number in 'n'
- *is positive, negative, or zero.
+ *This is the main function that assigns a random number to the variable 'n'
+ *and prints whether the number is positive, negative, or zero.
+ *
+ *Return: Always 0 (Success)
 */
 int main(void)
 {
