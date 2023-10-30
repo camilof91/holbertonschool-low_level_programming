@@ -1,4 +1,4 @@
-/*This program prints the numbers all possible combinations of single-digit numbers*/
+/*This program prints all possible combinations of single-digit numbers*/
 #include <stdio.h>
 /**
 *main - Entry point
