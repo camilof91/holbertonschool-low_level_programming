@@ -4,7 +4,7 @@
 /*Zero, positive,negative*/
 
 /*
- *betty style doc for function main goes there
+ *Desctription of funtion main
  *This program shows you whether the number in 'n'
  *is positive, negative, or zero.
 */
@@ -17,7 +17,7 @@ if (n == 0)
 {
 printf("%d is zero\n", n);
 }
-else if (n<0)
+else if (n < 0)
 {
 printf("%d is negative\n", n);
 }
