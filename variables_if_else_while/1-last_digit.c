@@ -2,6 +2,8 @@
 #include <time.h>
 #include <stdio.h>
 /**
+ *
+ *main - Entry point for the program
  *the funtion main
  *In the main function, an integer random number is generated,
  *and it is checked that if it is negative, it is converted
