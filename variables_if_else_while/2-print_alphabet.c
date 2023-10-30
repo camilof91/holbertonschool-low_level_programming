@@ -1,9 +1,10 @@
+/**
+*This program prints the alphabet in lowercase letters.
+*/
 #include <stdio.h>
 /**
-*This main display the alphabet on lowercase
-*
-*
-*
+*Description: This is the main function that prints the alphabet.
+* Return: Always returns 0 for successful execution.
 *return 0 successful
 */
 int main(void)
