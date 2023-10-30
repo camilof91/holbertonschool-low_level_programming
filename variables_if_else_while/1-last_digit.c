@@ -22,19 +22,21 @@ int main(void)
     {
       num = n * -1;
     }
-  if (num == 0)
-    {
-      printf("Last digit of %d is %d\n",n,num);
-    }
   else
     {
-      while(num > 0)
+      int aux = num % 10;
+      if (aux < 6 && aux != 0)
 	{
-	  int aux = num % 10;
-	  printf("Last digit of %d is %d\n", n , aux);
-	  num = -1;
+	  printf("Last digit of %d is %d and is less than 6 and not 0\n", n , aux);
+	}
+      else if(aux > 5)
+	{
+	  printf("Last digit of %d is %d and is greater than 5\n", n , aux);
+	}
+      else if(aux == 0)
+	{
+	  printf("Last digit of %d is %d and is 0\n", n , aux);
 	}
     }
-
     return (0);
 }
