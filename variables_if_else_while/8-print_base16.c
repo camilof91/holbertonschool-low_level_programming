@@ -19,7 +19,7 @@ putchar(num + '0');
 }
 else
 {
-putchar(num - 10 + 'A');
+putchar(num - 10 + 'a');
 }
 }
 putchar('\n');
