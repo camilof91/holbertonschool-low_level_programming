@@ -1,6 +1,4 @@
-/**
-*This program prints the alphabet in lowercase letters.
-*/
+/*This program prints the alphabet in lowercase letters.*/
 #include <stdio.h>
 /**
 *Description: This is the main function that prints the alphabet.
