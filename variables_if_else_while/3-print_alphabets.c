@@ -14,7 +14,7 @@ for (letra = 'a'; letra <= 'z'; letra++)
 {
 putchar(letra);
 }
-for(letra = 'A'; letra <= 'Z'; letra++)
+for (letra = 'A'; letra <= 'Z'; letra++)
 {
 putchar(letra);
 }
