@@ -10,7 +10,7 @@
 *taking the modulo 10. If the number is zero, the
 *result is printed directly without entering the loop.
 *
-*
+*Return: Always 0 (Success)
 */
 int main(void)
 {
