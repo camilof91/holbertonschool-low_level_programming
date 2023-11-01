@@ -2,7 +2,7 @@
 #include "main.h"
 
 /**
-*main - Entry point
+*print_alphabet - Entry point
 *
 *Description: This is the main function that prints the alphabet.
 *Return: void
