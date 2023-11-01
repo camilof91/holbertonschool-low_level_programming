@@ -1,9 +1,9 @@
-/*This program prints the alphabet in lowercase letters.*/
+/*This program prints _putchar*/
 #include "main.h"
 /**
 *main - Entry point
 *
-*Description: This is the main function that prints the alphabet.
+*Description: This is the main function that prints _putchar.
 *Return: Always returns 0 for successful execution.
 *
 */
