@@ -17,7 +17,7 @@ for (b = 0; b <= 9; b++)
 c = a * b;
 if (c > 9)
 {
-d = a % 10;
+d = c % 10;
 e = (c - d) / 10;
 _putchar(44);
 _putchar(32);
