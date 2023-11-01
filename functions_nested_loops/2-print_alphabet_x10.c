@@ -13,7 +13,7 @@ char a;
 int c;
 for (c = 0; c < 10; c++)
 {
-for (a = 'a';a <= 'z'; a++)
+for (a = 'a'; a <= 'z'; a++)
 {
 _putchar(a);
 }
