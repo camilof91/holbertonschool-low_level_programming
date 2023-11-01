@@ -1,10 +1,11 @@
-/*This program prints the las digit of a number.*/
+/*This program prints the last digit of a number.*/
 #include "main.h"
 /**
  *print_last_digit - Entry point
  *
- *Description: This is the main function that prints the alphabet.
- *Return: Always returns 0 for successful execution.
+ *Description: This is the main function that prints the last number
+ *@n: it is a number
+ *Return: 1
  *
  */
 int print_last_digit(int n)
