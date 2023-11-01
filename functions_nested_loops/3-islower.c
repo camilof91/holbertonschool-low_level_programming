@@ -4,6 +4,7 @@
  *_islower - Entry point
  *
  *Description: This is the main function that prints the alphabet.
+ *$c: the character to be verified
  *Return: 1 for lowercase and 0 for other kind of caracter
  *
  */
