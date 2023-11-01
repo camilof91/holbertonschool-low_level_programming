@@ -1,7 +1,7 @@
 /*This program prints the sign of a number*/
 #include "main.h"
 /**
-*print_sign(int n) - Entry point
+*print_sign - Entry point
 *
 *Description: This is the main function that prints the alphabet.
 *@n:it is a number to evaluate.
