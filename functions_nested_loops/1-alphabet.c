@@ -6,6 +6,7 @@
 *Description: This is the main function that prints the alphabet.
 *Return: void
 *
+*
 */
 void print_alphabet(void)
 {
