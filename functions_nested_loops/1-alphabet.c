@@ -4,7 +4,7 @@
 *main - Entry point
 *
 *Description: This is the main function that prints the alphabet.
-*Return: Always returns 0 for successful execution.
+*Return: void
 *
 */
 void print_alphabet(void)
