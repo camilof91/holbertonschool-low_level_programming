@@ -14,7 +14,7 @@ for (hd = 0; hd <= 2; hd++)
 {
 for (hu = 0; hu <= 9; hu++)
 {
-if ((hd <= 1 && hu <= 9)|| (hd <= 2 && hu <= 3))
+if ((hd <= 1 && hu <= 9) || (hd <= 2 && hu <= 3))
 {
 for (md = 0; md <= 5; md++)
 {
