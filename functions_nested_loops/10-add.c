@@ -4,10 +4,12 @@
  *add - Entry point
  *
  *Description: This is the main function that prints the alphabet.
+ *@a: numbers to return
+ *@b: numbers to return
  *Return: Always returns two ints.
  *
  */
-int add(int n1, int n2)
+int add(int a, int b)
 {
-return (n1 + n2);
+return (a + b);
 }
