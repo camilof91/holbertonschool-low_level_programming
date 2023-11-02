@@ -29,7 +29,7 @@ printf("\n");
 }
 else if (num > 98)
 {
-for (; num <= 98; num--)
+for (; num >= 98; num--)
 {
 printf("%d", num);
 if (num != 98)
