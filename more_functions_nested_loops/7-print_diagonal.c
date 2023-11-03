@@ -1,10 +1,10 @@
 /*This program prints a daigaonal.*/
 #include "main.h"
 /**
-*print_diagona - Entry point
+*print_diagonal - Entry point
 *
 *Description: This is the main function that prints a diagonal.
-*@n:number of diagonal 
+*@n:number of diagonal
 *Return: Always returns 0 for successful execution.
 *
 */
@@ -16,7 +16,7 @@ if (n <= 0)
 _putchar('\n');
 }
 else
-{     
+{    
 for (aux = 0; aux < n; aux++)
 {
 for (spa = 0; spa < aux; spa++)
