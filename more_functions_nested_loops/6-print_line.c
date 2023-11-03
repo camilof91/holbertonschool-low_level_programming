@@ -4,6 +4,7 @@
  *print_line - Entry point
  *
  *Description: This is the main function that prints a line.
+ *@n:line size
  *Return: Always returns 0 for successful execution.
  *
  */
