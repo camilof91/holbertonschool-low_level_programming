@@ -16,7 +16,7 @@ _putchar('\n');
 }
 else
 {
-for(aux = 0; aux < n; aux++)
+for (aux = 0; aux < n; aux++)
 {
 _putchar(95);
 }
