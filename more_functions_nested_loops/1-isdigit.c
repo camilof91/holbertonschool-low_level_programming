@@ -1,7 +1,7 @@
 /*This program veryfy if it a number o letters.*/
 #include <stdio.h>
 /**
- *int _isdigit - Entry point
+ *_isdigit - Entry point
  *
  *Description: This is the main function that prints the alphabet.
  *@c: number to verify
