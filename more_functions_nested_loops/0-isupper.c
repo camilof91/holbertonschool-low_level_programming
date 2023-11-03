@@ -7,7 +7,7 @@
  *@c: caracter to evaluate
  * Return: Always returns 0 for successful execution.
  *
- * */
+ */
 int _isupper(int c)
 {
 	if (c >= 65 && c <= 90)
