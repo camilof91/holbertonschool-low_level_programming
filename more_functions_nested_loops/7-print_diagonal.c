@@ -16,7 +16,7 @@ if (n <= 0)
 _putchar('\n');
 }
 else
-{    
+{
 for (aux = 0; aux < n; aux++)
 {
 for (spa = 0; spa < aux; spa++)
