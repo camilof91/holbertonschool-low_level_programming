@@ -9,35 +9,20 @@
  * Description: Print numbers from 00 to 99
  * Return: Zero value
  */
-
 int main(void)
 {
-int i = 0;
-int j, k;
-int count = 0;
-
-while (i <= 7)
+int digit1, digit2;
+for (digit1 = 0; digit1 < 9; digit1++)
 {
-j = i + 1;
-while (j <= 8)
+for (digit2 = digit1 + 1; digit2 < 10; digit2++)
 {
-k = j + 1;
-while (k <= 9)
-{
-putchar(i + '0');
-putchar(j + '0');
-putchar(k + '0');
-if (count != 119)
-{
+putchar((digit1 % 10) + '0');
+putchar((digit2 % 10) + '0');
+if (digit1 == 8 && digit2 == 9)
+continue;
 putchar(',');
 putchar(' ');
 }
-k++;
-count++;
-}
-j++;
-}
-i++;
 }
 putchar('\n');
 return (0);
