@@ -1,4 +1,5 @@
 /*This program prints in reverse a string.*/
+#include <stdio.h>
 #include "main.h"
 /**
  *print_rev - Entry point
@@ -16,7 +17,7 @@ while (*s != 0)
 s++;
 len++;
 }
-while (len > 0)
+while (len >= 0)
 {
 _putchar(*s);
 len--;
