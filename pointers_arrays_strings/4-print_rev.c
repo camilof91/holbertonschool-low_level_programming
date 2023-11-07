@@ -5,7 +5,7 @@
  *print_rev - Entry point
  *
  *Description: This is the main function that print in reverse a string.
- *@S: text to print
+ *@s: text to print
  *Return: Always returns 0 for successful execution.
  *
  */
@@ -16,7 +16,7 @@ while (s[len] != 0)
 {
 len++;
 }
-len--; 
+len--;
 while (len >= 0)
 {
 _putchar(s[len]);
