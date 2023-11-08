@@ -2,7 +2,7 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- *_strncat - Entry point
+ *_strcat - Entry point
  *
  *Description: This is the main function that prints the alphabet.
  *@dest: arrive end
