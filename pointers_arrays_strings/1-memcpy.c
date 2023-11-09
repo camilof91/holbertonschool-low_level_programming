@@ -1,9 +1,9 @@
 /*This program fills memory with a bute.*/
 #include "main.h"
 /**
- *_memset -   fills memory with a constant byte
+ *_memcpy -   fills memory with a constant byte
  *@src: values to copi
- *@best: memory to fill
+ *@dest: memory to fill
  *@n: bytes of the memory
  *Return: dest
  */
