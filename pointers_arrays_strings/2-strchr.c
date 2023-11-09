@@ -6,7 +6,7 @@
  *Description: This is the main function locate a character in a string.
  *@s: string
  *@c: character
- *Return: return s 
+ *Return: return s
  *
  */
 char *_strchr(char *s, char c)
