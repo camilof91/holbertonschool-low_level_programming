@@ -2,8 +2,8 @@
 #include "main.h"
 /**
  *_memset -   fills memory with a constant byte
- *@s: pointer block of memory to fill
- *@b: value to set
+ *@src: values to copi
+ *@best: memory to fill
  *@n: bytes of the memory
  *Return: dest
  */
