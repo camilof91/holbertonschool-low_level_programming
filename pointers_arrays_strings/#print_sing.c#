@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main ()
+{
+  int i =1;
+  int 
+  print_sign(i);
+  
+}
+
+int print_sign(int n)
+{
+  int i;
+  if (n > 0)
+    {
+      printf(" es mayor%d",n);
+      return (1);
+    }
+  if else (n == 0)
+	    {
+	      printf("Es igual a zero %d",n);
+		return (1);
+	    }
+  else
+    {
+      prinf("Es menor a zero %d",n);
+      return (-1);
+
+    }
+}
