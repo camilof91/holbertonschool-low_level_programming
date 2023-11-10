@@ -8,17 +8,21 @@
 unsigned int _strspn(char *s, char *accept)
 {
 int count = 0;
-while (*s) {
+while (*s)
+{
 char *a = accept;
 int found = 0;
-while (*a) {
-if (*s == *a) {
+while (*a)
+{
+if (*s == *a)
+{
 found = 1;
 break;
 }
 a++;
 }
-if (!found) {
+if (!found)
+{
 break;
 }
 count++;
