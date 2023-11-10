@@ -28,5 +28,5 @@ break;
 count++;
 s++;
 }
-return count;
+ return (count);
 }
