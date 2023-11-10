@@ -1,0 +1,25 @@
+/*This program prints the alphabet in lowercase letters.*/
+#include "main.h"
+/**
+ *print_chessboard - Entry point
+ *
+ *Description: This is the main function that prints the alphabet.
+ *Return: Always returns 0 for successful execution.
+ *e
+ */
+void print_chessboard(char (*a)[8])
+{
+  int i = 7, j = 0;
+  char aux;
+  while (*(a + j) != '\0')
+    {
+      aux = *(a + j);
+      _putchar(aux);
+      if (j == i)
+	{
+	  _putchar("\n");
+	  i = i * 7;
+	}
+      j++;
+    }
+}
