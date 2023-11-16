@@ -1,15 +1,13 @@
-/*This program prints the alphabet in lowercase letters.*/
+/*This program prints a string without funtion loop:.*/
 #include "main.h"
 /**
-*main - Entry point
-*
-*Description: This is the main function that prints the alphabet.
-*Return: Always returns 0 for successful execution.
-*
-*/
+ *_print_rev_recursion - prints a string in reverse
+ *@s: pointer block of memory to fill
+ *Return: void
+ */
 void _print_rev_recursion(char *s)
 {
-if (*s != '\0') 
+if (*s != '\0')
 {
 _print_rev_recursion(s + 1);
 _putchar(*s);
