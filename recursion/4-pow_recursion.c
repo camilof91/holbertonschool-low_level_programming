@@ -5,7 +5,7 @@
 *Description: This is the main function that prints the alphabet.
 *@x: int
 *@y: int pow
-*Return: Always returns -1, or 1 
+*Return: Always returns -1, or 1
 *
 */
 int _pow_recursion(int x, int y)
