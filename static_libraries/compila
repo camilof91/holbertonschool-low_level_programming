@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Ruta del directorio de origen
+directorio_origen="/root/holbertonschool-low_level_programming/static_libraries"
+
+# Ruta del directorio de destino (el directorio actual)
+directorio_destino="."
+
+# Compilar todos los archivos .c en el directorio de origen
+for archivo_c in "$directorio_origen"/*.c; do
+    nombre_archivo=$(basename "$archivo_c" .c)
+    gcc -Wall -Werror -Wextra -pedantic -c "$archivo_c" -o "$directorio_destino/$nombre_archivo.o"
+done
+
+echo "Compilación completa."
+
