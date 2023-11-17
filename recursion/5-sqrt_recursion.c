@@ -12,14 +12,14 @@ int _sqrt_recursion(int n)
 /* Base case: if n is negative or 0, it doesn't have a natural square root */
 if (n < 0)
 {
-return -1;
-} 
+return (-1);
+}
 if (n == 0 || n == 1)
-{ 
-return n;
+{
+return (n);
 }
 /* Recursive call: find the square root of the remainder of n */
-return find_sqrt(n, 2);
+return (find_sqrt(n, 2));
 }
 /**
  * find_sqrt - Helper function to find the square root using recursion.
@@ -33,7 +33,7 @@ int find_sqrt(int n, int guess)
 /* Base case: if the square of the guess is equal to n, the root is found */
 if (guess * guess == n)
 {
-return guess;
+return (guess);
 }
 /* If the guess is greater than half of n, there is no natural square root */
 if (guess > n / 2)
@@ -41,5 +41,5 @@ if (guess > n / 2)
 return (-1);
 }
 /* Recursive call: try the next guess */
-return find_sqrt(n, guess + 1);
+return (find_sqrt(n, guess + 1));
 }
