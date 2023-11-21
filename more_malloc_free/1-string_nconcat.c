@@ -9,14 +9,14 @@
 */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-char *p; 
+char *p;
 /* Puntero para almacenar la dirección de memoria del nuevo bloque.*/
 unsigned int size1 = 0, size2 = 0, i;
 /* Si s1 es NULL, establecerlo como una cadena vacía.*/
 if (s1 == NULL)
 {
 s1 = "";
-}	
+}
 /* Si s2 es NULL, establecerlo como una cadena vacía.*/
 if (s2 == NULL)
 {
@@ -37,17 +37,17 @@ size2++;
 if (n > size2)
 {
 n = size2;
-}	
-/* Asignar memoria para el nuevo bloque de memoria que*/ 
+}
+/* Asignar memoria para el nuevo bloque de memoria que*/
 /* contendrá la cadena concatenada.*/
 p = malloc((size1 + n + 1) * sizeof(char));
 /* Verificar si malloc tuvo éxito en la asignación de memoria.*/
 if (p == NULL)
 {
-return (0); 
+return (0);
 /* Devolver NULL si malloc falla.*/
 }
-/* Copiar los caracteres de la*/ 
+/* Copiar los caracteres de la*/
 /* primera cadena (s1) al nuevo */
 /* bloque de memoria.*/
 for (i = 0; i < size1; i++)
@@ -55,7 +55,7 @@ for (i = 0; i < size1; i++)
 p[i] = s1[i];
 }
 /*Copiar los */
-/* primeros n caracteres de la segunda cadena (s2)*/ 
+/* primeros n caracteres de la segunda cadena (s2)*/
 /* al nuevo bloque de memoria.*/
 for (; i < (size1 + n); i++)
 {
