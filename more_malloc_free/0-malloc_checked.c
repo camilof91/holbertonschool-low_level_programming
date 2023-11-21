@@ -1,11 +1,11 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * malloc_checked - Asigna dinámicamente un bloque de 
+ * malloc_checked - Asigna dinámicamente un bloque de
  * memoria y verifica si la asignación fue exitosa.
  * @b: Número de bytes a asignar.
  * Return: Puntero al bloque de memoria asignado.
- * Si la asignación falla, la función termina 
+ * Si la asignación falla, la función termina
  * el programa con un código de salida de 98.
  */
 void *malloc_checked(unsigned int b)
