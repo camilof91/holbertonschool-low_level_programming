@@ -5,7 +5,7 @@
  * cada uno de tamaño size bytes
  * @nmemb: número de elementos en el array
  * @size: tamaño de cada elemento en bytes
- * return: p a la memoria asignada, NULL si la asignación falla
+ * Return: *p a la memoria asignada, NULL si la asignación falla
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
