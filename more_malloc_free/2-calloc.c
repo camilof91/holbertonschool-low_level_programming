@@ -5,13 +5,13 @@
  * cada uno de tamaño size bytes
  * @nmemb: número de elementos en el array
  * @size: tamaño de cada elemento en bytes
- * Devuelve: puntero a la memoria asignada; NULL si la asignación falla
+ * return: puntero a la memoria asignada; NULL si la asignación falla
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 char *p;
 /* Declara una variable de tipo puntero para almacenar la memoria asignada*/
-unsigned int i;  
+unsigned int i;
 /* Declara una variable para la iteración*/
 if (nmemb == 0 || size == 0)
 return (NULL);
