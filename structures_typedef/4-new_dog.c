@@ -26,7 +26,7 @@ for (i = 0; i < len; i++)
 dup[i] = str[i];
 /* Null-terminate the duplicated string */
 dup[len] = '\0';
-return dup;
+return (dup);
 }
 
 /**
@@ -61,5 +61,5 @@ free(new_dog);
 return (NULL);
 }
 new_dog->age = age;
-return new_dog;
+return (new_dog);
 }
