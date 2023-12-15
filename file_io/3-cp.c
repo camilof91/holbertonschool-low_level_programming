@@ -41,26 +41,27 @@ int main(int argc, char *argv[]) {
 
     fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (fd_to == -1) {
+        close(fd_from);
         print_error(99, argv[2]);
     }
 
     while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0) {
         write_bytes = write(fd_to, buffer, read_bytes);
         if (write_bytes != read_bytes) {
+            close(fd_from);
+            close(fd_to);
             print_error(99, argv[2]);
         }
     }
 
     if (read_bytes == -1) {
+        close(fd_from);
+        close(fd_to);
         print_error(98, argv[1]);
     }
 
-    if (close(fd_from) == -1) {
-        print_error(100, argv[1]);
-    }
-
-    if (close(fd_to) == -1) {
-        print_error(100, argv[2]);
+    if (close(fd_from) == -1 || close(fd_to) == -1) {
+        print_error(100, NULL);
     }
 
     return 0;
