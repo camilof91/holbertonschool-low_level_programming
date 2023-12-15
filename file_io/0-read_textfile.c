@@ -19,10 +19,12 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (filename == NULL)
 		return (0);
 
+	/* Open the file with read-only permissions */
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
 
+	/* Allocate memory for the buffer */
 	buffer = malloc(letters);
 	if (buffer == NULL)
 	{
@@ -30,6 +32,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 
+	/* Read from the file */
 	n_read = read(fd, buffer, letters);
 	if (n_read == -1)
 	{
@@ -38,7 +41,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 
-
+	/* Write to the standard output */
 	n_written = write(STDOUT_FILENO, buffer, n_read);
 	if (n_written == -1 || n_written != n_read)
 	{
@@ -47,6 +50,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 
+	/* Clean up and close the file */
 	free(buffer);
 	close(fd);
 
