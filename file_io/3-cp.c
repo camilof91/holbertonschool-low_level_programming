@@ -55,8 +55,12 @@ int main(int argc, char *argv[]) {
         print_error(98, argv[1]);
     }
 
-    if (close(fd_from) == -1 || close(fd_to) == -1) {
-        print_error(100, NULL);
+    if (close(fd_from) == -1) {
+        print_error(100, argv[1]);
+    }
+
+    if (close(fd_to) == -1) {
+        print_error(100, argv[2]);
     }
 
     return 0;
