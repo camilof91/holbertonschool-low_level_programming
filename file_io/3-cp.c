@@ -1,5 +1,7 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>  // Include this header for exit function
+#include <unistd.h>  // Include this header for STDERR_FILENO
 
 /**
  * error_file - checks if files can be opened.
