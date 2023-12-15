@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/stat.h>
 
 #define BUFFER_SIZE 1024
 
@@ -23,6 +24,15 @@ void print_error(int code, const char *file_name) {
             break;
     }
     exit(code);
+}
+
+void copy_permissions(const char *source, const char *destination) {
+    struct stat st;
+    if (stat(source, &st) == 0) {
+        if (chmod(destination, st.st_mode) == -1) {
+            print_error(99, destination);
+        }
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -63,6 +73,8 @@ int main(int argc, char *argv[]) {
     if (close(fd_from) == -1 || close(fd_to) == -1) {
         print_error(100, NULL);
     }
+
+    copy_permissions(argv[1], argv[2]);
 
     return 0;
 }
