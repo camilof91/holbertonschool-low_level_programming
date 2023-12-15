@@ -29,7 +29,7 @@ void print_error(int code, const char *file_name) {
 void copy_permissions(const char *source, const char *destination) {
     struct stat st;
     if (stat(source, &st) == 0) {
-        if (chmod(destination, st.st_mode) == -1) {
+        if (fchmod(destination, st.st_mode) == -1) {
             print_error(99, destination);
         }
     }
