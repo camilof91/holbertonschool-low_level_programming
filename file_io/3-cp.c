@@ -1,7 +1,8 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>  // Include this header for exit function
-#include <unistd.h>  // Include this header for STDERR_FILENO
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>  // Include this header for open, O_RDONLY, O_CREAT, O_WRONLY, and O_TRUNC
 
 /**
  * error_file - checks if files can be opened.
