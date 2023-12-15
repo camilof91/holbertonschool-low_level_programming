@@ -19,7 +19,8 @@ int create_file(const char *filename, char *text_content)
 	if (filename == NULL)
 		return (-1);
 
-	/* Open the file with read-write permissions, creating it if it doesn't exist */
+	/* Open the file with read-write permissions, creating it if*/
+	/* it doesn't exist */
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, mode);
 	if (fd == -1)
 		return (-1);
