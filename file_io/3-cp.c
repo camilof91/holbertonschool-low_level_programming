@@ -1,86 +1,82 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "main.h"
-
-#define BUFFER_SIZE 1024
+#include <unistd.h>
 
 /**
- * main - Copies the content of a file to another file.
- * @argc: The number of command-line arguments.
- * @argv: An array containing the command-line arguments.
- * Return: 0 on success, or the corresponding error code on failure.
+ * error_file - checks if files can be opened.
+ * @file_from: file_from.
+ * @file_to: file_to.
+ * @argv: arguments vector.
+ * Return: no return.
+ */
+void error_file(int file_from, int file_to, char *argv[])
+{
+    if (file_from == -1)
+    {
+        write(STDERR_FILENO, "Error: Can't read from file ", 29);
+        write(STDERR_FILENO, argv[1], 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(98);
+    }
+    if (file_to == -1)
+    {
+        write(STDERR_FILENO, "Error: Can't write to ", 23);
+        write(STDERR_FILENO, argv[2], 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(99);
+    }
+}
+
+/**
+ * main - check the code for Holberton School students.
+ * @argc: number of arguments.
+ * @argv: arguments vector.
+ * Return: Always 0.
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, r, w;
-	char buffer[BUFFER_SIZE];
+    int file_from, file_to, err_close;
+    ssize_t nchars, nwr;
+    char buf[1024];
 
-	/* Check for the correct number of arguments */
-	if (argc != 3)
-	{
-	       write(STDERR_FILENO, "Usage: ", 7);
-	       write(STDERR_FILENO, argv[0], 1); /* argv[0] is the program name */
-	       write(STDERR_FILENO, " file_from file_to\n", 20);
-	       exit(97);
-	}
+    if (argc != 3)
+    {
+        write(STDERR_FILENO, "Usage: ", 7);
+        write(STDERR_FILENO, argv[0], 1); // argv[0] is the program name
+        write(STDERR_FILENO, " file_from file_to\n", 20);
+        exit(97);
+    }
 
-	/* Open the source file in read-only mode */
-	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
-	{
-		write(STDERR_FILENO, "Error: Can't read from file ", 29);
-		write(STDERR_FILENO, argv[1], 1);
-		write(STDERR_FILENO, "\n", 1);
-		exit(98);
-	}
+    file_from = open(argv[1], O_RDONLY);
+    file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
+    error_file(file_from, file_to, argv);
 
-	/* Open or create the destination file */
-	/*in write-only mode, truncating it if it already exists */
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		write(STDERR_FILENO, "Error: Can't write to ", 23);
-		write(STDERR_FILENO, argv[2], 1);
-		write(STDERR_FILENO, "\n", 1);
-		exit(99);
-	}
+    nchars = 1024;
+    while (nchars == 1024)
+    {
+        nchars = read(file_from, buf, 1024);
+        if (nchars == -1)
+            error_file(-1, 0, argv);
+        nwr = write(file_to, buf, nchars);
+        if (nwr == -1)
+            error_file(0, -1, argv);
+    }
 
-	/* Read and write in blocks until nothing is left to read */
-	do
-	{
-		r = read(fd_from, buffer, BUFFER_SIZE);
-		if (r == -1)
-		{
-			write(STDERR_FILENO, "Error: Can't read from file ", 29);
-			write(STDERR_FILENO, argv[1], 1);
-			write(STDERR_FILENO, "\n", 1);
-			exit(98);
-		}
-		w = write(fd_to, buffer, r);
-		if (w == -1 || w != r)
-		{
-			write(STDERR_FILENO, "Error: Can't write to ", 23);
-			write(STDERR_FILENO, argv[2], 1);
-			write(STDERR_FILENO, "\n", 1);
-			exit(99);
-		}
-	}
-	while (r == BUFFER_SIZE);
-	/* Close the file descriptors */
-	if (close(fd_from) == -1)
-	{
-		write(STDERR_FILENO, "Error: Can't close fd ", 23);
-		write(STDERR_FILENO, "file_from", 1);
-		write(STDERR_FILENO, "\n", 1);
-		exit(100);
-	}
-	if (close(fd_to) == -1)
-	{
-		write(STDERR_FILENO, "Error: Can't close fd ", 23);
-		write(STDERR_FILENO, "file_to", 1);
-		write(STDERR_FILENO, "\n", 1);
-		exit(100);
-	}
-	return (0);
+    err_close = close(file_from);
+    if (err_close == -1)
+    {
+        write(STDERR_FILENO, "Error: Can't close fd ", 23);
+        write(STDERR_FILENO, "file_from", 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(100);
+    }
+
+    err_close = close(file_to);
+    if (err_close == -1)
+    {
+        write(STDERR_FILENO, "Error: Can't close fd ", 23);
+        write(STDERR_FILENO, "file_to", 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(100);
+    }
+    return (0);
 }
