@@ -1,65 +1,89 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include "main.h"
 
 #define BUFFER_SIZE 1024
 
 /**
- * error_exit - prints an error message and exits the program with a specified code
- * @code: the exit code
- * @message: the error message to print
- * Return: void
+ * main - Copia el contenido de un archivo a otro.
+ * @argc: El número de argumentos en la línea de comandos.
+ * @argv: Un array que contiene los argumentos de la línea de comandos.
+ * Devuelve: 0 en caso de éxito, o el código de error correspondiente en caso de fallo.
  */
-void error_exit(int code, const char *message)
+int main(int argc, char *argv[])
 {
-	dprintf(STDERR_FILENO, "%s\n", message);
-	exit(code);
-}
+    int fd_from, fd_to, r, w;
+    char buffer[BUFFER_SIZE];
 
-/**
- * main - copies the content of a file to another file
- * @argc: the number of arguments
- * @argv: an array of arguments
- * Return: 0 on success, other values on failure
- */
-int main(int argc, char **argv)
-{
-	int fd_from, fd_to;
-	ssize_t n_read, n_written;
-	char buffer[BUFFER_SIZE];
+    /* Verifica el número correcto de argumentos */
+    if (argc != 3)
+    {
+        write(STDERR_FILENO, "Uso: ", 6);
+        write(STDERR_FILENO, argv[0], 1); /* argv[0] es el nombre del programa*/
+        write(STDERR_FILENO, " archivo_desde archivo_hacia\n", 29);
+        exit(97);
+    }
 
-	if (argc != 3)
-		error_exit(97, "Usage: cp file_from file_to");
+    /* Abre el archivo de origen en modo lectura */
+    fd_from = open(argv[1], O_RDONLY);
+    if (fd_from == -1)
+    {
+        write(STDERR_FILENO, "Error: No se puede leer del archivo ", 38);
+        write(STDERR_FILENO, argv[1], 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(98);
+    }
 
-	/* Open the source file with read-only permissions */
-	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
-		error_exit(98, "Error: Can't read from file");
+    /* Abre o crea el archivo de destino en modo escritura, truncándolo si ya existe */
+    fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+    if (fd_to == -1)
+    {
+        write(STDERR_FILENO, "Error: No se puede escribir en ", 32);
+        write(STDERR_FILENO, argv[2], 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(99);
+    }
 
-	/* Open or create the destination file with read-write permissions, truncating it if it already exists */
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	if (fd_to == -1)
-		error_exit(99, "Error: Can't write to file");
+    /* Lee y escribe en bloques hasta que no quede nada por leer */
+    do
+    {
+        r = read(fd_from, buffer, BUFFER_SIZE);
+        if (r == -1)
+        {
+            write(STDERR_FILENO, "Error: No se puede leer del archivo ", 38);
+            write(STDERR_FILENO, argv[1], 1);
+            write(STDERR_FILENO, "\n", 1);
+            exit(98);
+        }
 
-	/* Copy the content of the source file to the destination file */
-	while ((n_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
-	{
-		n_written = write(fd_to, buffer, n_read);
-		if (n_written == -1 || n_written != n_read)
-			error_exit(99, "Error: Can't write to file");
-	}
+        w = write(fd_to, buffer, r);
+        if (w == -1 || w != r)
+        {
+            write(STDERR_FILENO, "Error: No se puede escribir en ", 32);
+            write(STDERR_FILENO, argv[2], 1);
+            write(STDERR_FILENO, "\n", 1);
+            exit(99);
+        }
 
-	/* Check for read error */
-	if (n_read == -1)
-		error_exit(98, "Error: Can't read from file");
+    } while (r == BUFFER_SIZE);
 
-	/* Close file descriptors */
-	if (close(fd_from) == -1)
-		error_exit(100, "Error: Can't close fd");
+    /* Cierra los descriptores de archivo */
+    if (close(fd_from) == -1)
+    {
+        write(STDERR_FILENO, "Error: No se puede cerrar el descriptor ", 41);
+        write(STDERR_FILENO, "archivo_desde", 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(100);
+    }
 
-	if (close(fd_to) == -1)
-		error_exit(100, "Error: Can't close fd");
+    if (close(fd_to) == -1)
+    {
+        write(STDERR_FILENO, "Error: No se puede cerrar el descriptor ", 41);
+        write(STDERR_FILENO, "archivo_hacia", 1);
+        write(STDERR_FILENO, "\n", 1);
+        exit(100);
+    }
 
-	return (0);
+    return (0);
 }
