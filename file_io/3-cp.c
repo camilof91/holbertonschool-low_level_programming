@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
     int from, to;
     ssize_t rd, wr;
 
+    struct stat st;
+
     if (argc != 3)
     {
         dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
@@ -30,7 +32,6 @@ int main(int argc, char *argv[])
     }
 
     /* Verificar si el archivo de destino ya existe */
-    struct stat st;
     if (stat(argv[2], &st) == 0)
     {
         /* El archivo de destino ya existe */
