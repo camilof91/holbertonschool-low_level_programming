@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     struct stat st;
     if (stat(argv[2], &st) == 0 && !(st.st_mode & S_IWUSR))
     {
-        // El archivo de destino ya existe y no tiene permisos de escritura
+    
         dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
         close_file(from);
         free(buffer);
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
     if (rd == -1 || wr == -1)
     {
-        // Hubo un error durante la lectura o escritura
+        
         exit(98);
     }
 
