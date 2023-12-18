@@ -30,19 +30,6 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-    if (stat(argv[2], &st) == 0)
-    {
-
-        if (!(st.st_mode & S_IWUSR))
-        {
-
-           dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
-            close_file(from);
-            free(buffer);
-            exit(99);
-        }
-    }
-
     to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
     if (to == -1)
     {
@@ -52,28 +39,21 @@ int main(int argc, char *argv[])
         exit(99);
     }
 
-    do
+    while ((rd = read(from, buffer, 1024)) > 0)
     {
-        rd = read(from, buffer, 1024);
-        if (rd == -1)
-        {
-            dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-            break;
-        }
-
         wr = write(to, buffer, rd);
         if (wr == -1)
         {
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
             break;
         }
-    } while (rd > 0);
+    }
 
     close_file(from);
     close_file(to);
     free(buffer);
 
-    if (rd == -1 || wr == -1)
+    if (rd == -1)
     {
         exit(98);
     }
