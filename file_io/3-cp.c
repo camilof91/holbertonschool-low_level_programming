@@ -29,14 +29,13 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-    // Verificar si el archivo de destino ya existe
     struct stat st;
     if (stat(argv[2], &st) == 0)
     {
-        // El archivo de destino ya existe
+        
         if (!(st.st_mode & S_IWUSR))
         {
-            // No tiene permisos de escritura, manejar el error
+            
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
             close_file(from);
             free(buffer);
