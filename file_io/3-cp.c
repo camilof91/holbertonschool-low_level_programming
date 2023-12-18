@@ -17,8 +17,11 @@ int main(int argc, char *argv[])
     }
 
     char *buffer = create_buffer();
+    int from, to;
+    ssize_t rd, wr;
+    struct stat st;
 
-    int from = open(argv[1], O_RDONLY);
+    from = open(argv[1], O_RDONLY);
     if (from == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
@@ -26,17 +29,15 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-    struct stat st;
     if (stat(argv[2], &st) == 0 && !(st.st_mode & S_IWUSR))
     {
-    
         dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
         close_file(from);
         free(buffer);
         exit(99);
     }
 
-    int to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+    to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
     if (to == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[2]);
@@ -45,7 +46,6 @@ int main(int argc, char *argv[])
         exit(99);
     }
 
-    ssize_t rd, wr;
     do
     {
         rd = read(from, buffer, 1024);
@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
 
     if (rd == -1 || wr == -1)
     {
-        
         exit(98);
     }
 
