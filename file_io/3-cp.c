@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
 char *create_buffer(void);
 void close_file(int fd);
@@ -26,6 +27,21 @@ int main(int argc, char *argv[])
         dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
         free(buffer);
         exit(98);
+    }
+
+    // Verificar si el archivo de destino ya existe
+    struct stat st;
+    if (stat(argv[2], &st) == 0)
+    {
+        // El archivo de destino ya existe
+        if (!(st.st_mode & S_IWUSR))
+        {
+            // No tiene permisos de escritura, manejar el error
+            dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
+            close_file(from);
+            free(buffer);
+            exit(99);
+        }
     }
 
     to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
