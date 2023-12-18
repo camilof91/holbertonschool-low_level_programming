@@ -1,9 +1,11 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 char *create_buffer(char *file);
 void close_file(int fd);
-
-
 
 int main(int argc, char *argv[])
 {
@@ -63,4 +65,32 @@ int main(int argc, char *argv[])
     free(buffer);
 
     return (0);
+}
+
+char *create_buffer(char *file)
+{
+    char *buffer;
+
+    buffer = malloc(sizeof(char) * 1024);
+
+    if (buffer == NULL)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
+        exit(99);
+    }
+
+    return (buffer);
+}
+
+void close_file(int fd)
+{
+    int c;
+
+    c = close(fd);
+
+    if (c == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+        exit(100);
+    }
 }
