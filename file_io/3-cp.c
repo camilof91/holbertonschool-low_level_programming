@@ -10,17 +10,18 @@ void close_file(int fd);
 
 int main(int argc, char *argv[])
 {
+    char *buffer;
+    int from, to;
+    ssize_t rd, wr;
+    struct stat st;
+
     if (argc != 3)
     {
         dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
         exit(97);
     }
 
-    char *buffer = create_buffer();
-    int from, to;
-    ssize_t rd, wr;
-    struct stat st;
-
+    buffer = create_buffer();
     from = open(argv[1], O_RDONLY);
     if (from == -1)
     {
