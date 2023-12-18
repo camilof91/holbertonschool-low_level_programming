@@ -5,8 +5,26 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-char *create_buffer(void);
-void close_file(int fd);
+void close_file(int fd)
+{
+    int c = close(fd);
+    if (c == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+        exit(100);
+    }
+}
+
+char *create_buffer(void)
+{
+    char *buffer = malloc(sizeof(char) * 1024);
+    if (buffer == NULL)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't allocate buffer\n");
+        exit(99);
+    }
+    return buffer;
+}
 
 int main(int argc, char *argv[])
 {
@@ -83,23 +101,3 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-char *create_buffer(void)
-{
-    char *buffer = malloc(sizeof(char) * 1024);
-    if (buffer == NULL)
-    {
-        dprintf(STDERR_FILENO, "Error: Can't allocate buffer\n");
-        exit(99);
-    }
-    return buffer;
-}
-
-void close_file(int fd)
-{
-    int c = close(fd);
-    if (c == -1)
-    {
-        dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-        exit(100);
-    }
-}
