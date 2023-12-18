@@ -3,7 +3,7 @@
 char *create_buffer(char *file);
 void close_file(int fd);
 
-// ... (resto del código)
+
 
 int main(int argc, char *argv[])
 {
