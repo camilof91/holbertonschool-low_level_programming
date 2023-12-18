@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <sys/stat.h>
 
 char *create_buffer(void);
 void close_file(int fd);
@@ -13,7 +12,6 @@ int main(int argc, char *argv[])
     char *buffer;
     int from, to;
     ssize_t rd, wr;
-    struct stat st;
 
     if (argc != 3)
     {
