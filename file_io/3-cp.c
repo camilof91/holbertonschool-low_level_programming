@@ -32,11 +32,11 @@ int main(int argc, char *argv[])
 
     if (stat(argv[2], &st) == 0)
     {
-        // El archivo de destino ya existe
+
         if (!(st.st_mode & S_IWUSR))
         {
-            // No tiene permisos de escritura, manejar el error
-            dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
+
+           dprintf(STDERR_FILENO, "Error: Can't write to %s. Destination file exists and has no write permissions.\n", argv[2]);
             close_file(from);
             free(buffer);
             exit(99);
