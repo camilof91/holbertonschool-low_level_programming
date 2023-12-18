@@ -5,14 +5,14 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-char *create_buffer(char *file);
+char *create_buffer(void);
 void close_file(int fd);
+struct stat st;
 
 int main(int argc, char *argv[])
 {
     int from, to, rd, wr;
     char *buffer;
-    struct stat st;  
 
     if (argc != 3)
     {
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         exit(97);
     }
 
-    buffer = create_buffer(argv[2]);
+    buffer = create_buffer();
 
     from = open(argv[1], O_RDONLY);
     if (from == -1)
@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
         exit(98);
     }
 
-   
+    
     if (stat(argv[2], &st) == 0)
     {
-       
+        
         if (!(st.st_mode & S_IWUSR))
         {
            
@@ -80,29 +80,25 @@ int main(int argc, char *argv[])
     close_file(to);
     free(buffer);
 
-    return (0);
+    return 0;
 }
 
-char *create_buffer(char *file)
+char *create_buffer(void)
 {
-    char *buffer;
-
-    buffer = malloc(sizeof(char) * 1024);
+    char *buffer = malloc(sizeof(char) * 1024);
 
     if (buffer == NULL)
     {
-        dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
+        dprintf(STDERR_FILENO, "Error: Can't allocate buffer\n");
         exit(99);
     }
 
-    return (buffer);
+    return buffer;
 }
 
 void close_file(int fd)
 {
-    int c;
-
-    c = close(fd);
+    int c = close(fd);
 
     if (c == -1)
     {
