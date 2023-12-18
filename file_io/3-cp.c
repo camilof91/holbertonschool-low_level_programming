@@ -43,18 +43,25 @@ int main(int argc, char *argv[])
         if (wr == -1)
         {
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-            break;
+            close_file(from);
+            close_file(to);
+            free(buffer);
+            exit(99);
         }
+    }
+
+    if (rd == -1)
+    {
+        dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+        close_file(from);
+        close_file(to);
+        free(buffer);
+        exit(98);
     }
 
     close_file(from);
     close_file(to);
     free(buffer);
-
-    if (rd == -1)
-    {
-        exit(98);
-    }
 
     return 0;
 }
