@@ -1,4 +1,5 @@
 #include "hash_tables.h"
+#include <stdlib.h>  /* Include the necessary header file for free and malloc */
 #include <string.h>
 
 /**
@@ -54,5 +55,6 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	/* Insert the new node at the beginning of the linked list */
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
+
 	return (1);
 }
