@@ -1,5 +1,5 @@
 #include "hash_tables.h"
-#include <stdlib.h>  /* Include the necessary header file for free and malloc */
+#include <stdlib.h>
 #include <string.h>
 
 /**
@@ -12,49 +12,54 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index;
-	hash_node_t *new_node, *current_node;
-
-	/* Check for NULL pointers and empty key */
 	if (ht == NULL || key == NULL || *key == '\0')
 		return (0);
 
-	/* Compute the index where the key/value pair should be stored */
-	index = key_index((unsigned char *)key, ht->size);
+	unsigned long int index = key_index((unsigned char *)key, ht->size);
+	hash_node_t *new_node = create_node(key, value);
 
-	/* Check if a node with the same key already exists */
-	current_node = ht->array[index];
-	while (current_node != NULL)
-	{
-		/* If a node with the same key exists, update its value */
-		if (strcmp(current_node->key, key) == 0)
-		{
-			free(current_node->value); /* Free existing value */
-			current_node->value = strdup(value); /* Duplicate new value */
-			if (current_node->value == NULL)
-				return (0);
-			return (1);
-		}
-		current_node = current_node->next;
-	}
-
-	/* Allocate memory for a new node and duplicate key and value */
-	new_node = malloc(sizeof(hash_node_t));
 	if (new_node == NULL)
 		return (0);
+
+	insert_node_at_index(ht, new_node, index);
+	return (1);
+}
+
+/**
+ * create_node - Creates a new hash node.
+ * @key: The key.
+ * @value: The value.
+ *
+ * Return: A pointer to the new node, or NULL on failure.
+ */
+hash_node_t *create_node(const char *key, const char *value)
+{
+	hash_node_t *new_node = malloc(sizeof(hash_node_t));
+	if (new_node == NULL)
+		return (NULL);
+
 	new_node->key = strdup(key);
 	new_node->value = strdup(value);
+
 	if (new_node->key == NULL || new_node->value == NULL)
 	{
 		free(new_node->key);
 		free(new_node->value);
 		free(new_node);
-		return (0);
+		return (NULL);
 	}
+	new_node->next = NULL;
+	return (new_node);
+}
 
-	/* Insert the new node at the beginning of the linked list */
+/**
+ * insert_node_at_index - Inserts a node at the beginning of the linked list.
+ * @ht: The hash table.
+ * @new_node: The new node to insert.
+ * @index: The index at which to insert the node.
+ */
+void insert_node_at_index(hash_table_t *ht, hash_node_t *new_node, unsigned long int index)
+{
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
-
-	return (1);
 }
