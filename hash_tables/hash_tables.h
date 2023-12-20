@@ -40,8 +40,6 @@ void hash_table_print(const hash_table_t *ht);
 void hash_table_delete(hash_table_t *ht);
 
 
-hash_node_t *create_node(const char *key, const char *value);
-void insert_node_at_index(hash_table_t *ht, hash_node_t *new_node, unsigned long int index);
 
 
 #endif
