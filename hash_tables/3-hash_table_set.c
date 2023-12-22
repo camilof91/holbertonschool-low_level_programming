@@ -1,53 +1,65 @@
+#include "hash_tables.h"
 #include <stdlib.h>
 #include <string.h>
-#include "hash_tables.h"
 
 /**
- * create_node - Creates a new hash node.
- * @key: The key string.
- * @value: The value string.
+ * hash_table_set - Adds an element to the hash table
+ * @ht: The hash table to add or update the key/value to
+ * @key: The key
+ * @value: The value associated with the key
  *
- * Return: A pointer to the new node, or NULL on failure.
+ * Return: 1 if it succeeded, 0 otherwise
+ * In case of collision, add the new node at the beginning of the list
  */
-hash_node_t *create_node(const char *key, const char *value)
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-    hash_node_t *new_node;
+    unsigned long int index;
+    hash_node_t *new_node, *current_node;
 
+    if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+        return (0);
+
+    index = key_index((const unsigned char *)key, ht->size);
+
+    /* Check for collision */
+    current_node = ht->array[index];
+    while (current_node)
+    {
+        if (strcmp(current_node->key, key) == 0)
+        {
+            /* Update value if key already exists */
+            free(current_node->value);
+            current_node->value = strdup(value);
+            if (current_node->value == NULL)
+                return (0);
+            return (1);
+        }
+        current_node = current_node->next;
+    }
+
+    /* Create a new node */
     new_node = malloc(sizeof(hash_node_t));
     if (new_node == NULL)
-        return (NULL);
+        return (0);
 
     new_node->key = strdup(key);
     if (new_node->key == NULL)
     {
         free(new_node);
-        return (NULL);
+        return (0);
     }
 
     new_node->value = strdup(value);
     if (new_node->value == NULL)
     {
-        free(new_node->key);
+     free(new_node->key);
         free(new_node);
-        return (NULL);
+        return (0);
     }
 
-    new_node->next = NULL;
-
-    return (new_node);
-}
-
-/**
- * insert_node_at_index - Inserts a node at a given index in the hash table.
- * @ht: The hash table.
- * @new_node: The node to insert.
- * @index: The index at which to insert the node.
- */
-void insert_node_at_index(hash_table_t *ht, hash_node_t *new_node, unsigned long int index)
-{
-    if (ht == NULL || new_node == NULL || index >= ht->size)
-        return;
-
+    /* Handle collision by adding the new node at the beginning of the list */
     new_node->next = ht->array[index];
     ht->array[index] = new_node;
+
+    return (1);
 }
