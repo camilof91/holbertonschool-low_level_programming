@@ -41,7 +41,7 @@ hash_node_t *create_node(const char *key, const char *value)
  * @new_node: The node to insert.
  * @index: The index at which to insert the node.
  */
-void insert_n_index(hash_table_t *ht, hash_node_t *new_node, long int index)
+void nindex(hash_table_t *ht, hash_node_t *new_node, unsigned long int index)
 {
 	if (ht == NULL || new_node == NULL || index >= ht->size)
 		return;
@@ -89,6 +89,6 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	}
 
-	insert_n_index(ht, new_node, index);
+	nindex(ht, new_node, index);
 	return (1);
 }

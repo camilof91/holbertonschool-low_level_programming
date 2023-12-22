@@ -43,7 +43,7 @@ void hash_table_delete(hash_table_t *ht);
 
 /* New function prototypes */
 hash_node_t *create_node(const char *key, const char *value);
-void insert_n_index(hash_table_t *ht, hash_node_t *new_node, long int index);
+void nindex(hash_table_t *ht, hash_node_t *new_node, unsigned long int index);
 
 #endif /* HASH_TABLES_H */
 
