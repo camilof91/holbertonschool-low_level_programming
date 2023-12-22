@@ -1,31 +1,51 @@
 #include "hash_tables.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
- * hash_table_delete - Deletes a hash table.
- * @ht: The hash table to be deleted.
+ * hash_table_set - Add or update an element in a hash table.
+ * @ht: A pointer to the hash table.
+ * @key: The key to add - cannot be an empty string.
+ * @value: The value associated with key.
+ *
+ * Return: Upon failure - 0.
+ *         Otherwise - 1.
  */
-void hash_table_delete(hash_table_t *ht)
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-    unsigned long int i;
-    hash_node_t *current, *temp;
+    hash_node_t *new_node, *temp;
+    char *value_copy;
+    unsigned long int index, i;
 
-    if (ht == NULL)
-        return;
+    if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+        return (0);
 
-    for (i = 0; i < ht->size; i++)
+    value_copy = strdup(value);
+    if (value_copy == NULL)
+        return (0);
+
+    index = key_index((const unsigned char *)key, ht->size);
+    temp = ht->array[index];
+
+    while (temp)
     {
-        current = ht->array[i];
-        while (current != NULL)
+        if (strcmp(temp->key, key) == 0)
         {
-            temp = current;
-            current = current->next;
-            free(temp->key);
-            free(temp->value);
-            free(temp);
+            free(temp->value); // Liberar la memoria del valor anterior
+            temp->value = value_copy;
+            return (1);
         }
+        temp = temp->next;
     }
 
-    free(ht->array);
-    free(ht);
+    new_node = create_node(key, value);
+    if (new_node == NULL)
+    {
+        free(value_copy);
+        return (0);
+    }
+
+    new_node->next = ht->array[index];
+    ht->array[index] = new_node;
+    return (1);
 }
