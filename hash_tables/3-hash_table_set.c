@@ -1,53 +1,4 @@
 #include "hash_tables.h"
-#include <stdlib.h>
-#include <string.h>
-
-/**
- * create_node - Creates a new hash node.
- * @key: The key string.
- * @value: The value string.
- *
- * Return: A pointer to the new node, or NULL on failure.
- */
-hash_node_t *create_node(const char *key, const char *value)
-{
-	hash_node_t *new_node = malloc(sizeof(hash_node_t));
-
-	if (new_node == NULL)
-		return (NULL);
-
-	new_node->key = strdup(key);
-	if (new_node->key == NULL)
-	{
-		free(new_node);
-		return (NULL);
-	}
-
-	new_node->value = strdup(value);
-	if (new_node->value == NULL)
-	{
-		free(new_node->key);
-		free(new_node);
-		return (NULL);
-	}
-
-	new_node->next = NULL;
-	return (new_node);
-}
-
-/**
- * nindex - Inserts a node at a given index in the hash table.
- * @ht: The hash table.
- * @new_node: The node to insert.
- * @index: The index at which to insert the node.
- */
-void nindex(hash_table_t *ht, hash_node_t *new_node, unsigned long int index)
-{
-	if (ht == NULL || new_node == NULL || index >= ht->size)
-		return;
-	new_node->next = ht->array[index];
-	ht->array[index] = new_node;
-}
 
 /**
  * hash_table_set - Add or update an element in a hash table.
@@ -60,7 +11,7 @@ void nindex(hash_table_t *ht, hash_node_t *new_node, unsigned long int index)
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new_node;
+	hash_node_t *new;
 	char *value_copy;
 	unsigned long int index, i;
 
@@ -82,13 +33,21 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		}
 	}
 
-	new_node = create_node(key, value);
-	if (new_node == NULL)
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
 	{
 		free(value_copy);
 		return (0);
 	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(new);
+		return (0);
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
 
-	nindex(ht, new_node, index);
 	return (1);
 }
