@@ -1,5 +1,4 @@
 #include "hash_tables.h"
-#include <stdlib.h>
 
 /**
  * hash_table_delete - Deletes a hash table.
@@ -24,7 +23,7 @@ void hash_table_delete(hash_table_t *ht)
             free(current);
             current = temp;
         }
-        ht->array[i] = NULL;  /* Clear the array after freeing nodes */
+        ht->array[i] = NULL;  // Clear the array after freeing nodes
     }
 
     free(ht->array);
