@@ -31,7 +31,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
     {
         if (strcmp(temp->key, key) == 0)
         {
-            free(temp->value); // Liberar la memoria del valor anterior
+            free(temp->value);
             temp->value = value_copy;
             return (1);
         }
