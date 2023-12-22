@@ -1,34 +1,31 @@
-int hash_table_set(hash_table_t *ht, const char *key, const char *value)
+#include "hash_tables.h"
+#include <stdlib.h>
+
+/**
+ * hash_table_delete - Deletes a hash table.
+ * @ht: The hash table to be deleted.
+ */
+void hash_table_delete(hash_table_t *ht)
 {
-    hash_node_t *new_node;
-    char *value_copy;
-    unsigned long int index, i;
+    unsigned long int i;
+    hash_node_t *current, *temp;
 
-    if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
-        return (0);
+    if (ht == NULL)
+        return;
 
-    value_copy = strdup(value);
-    if (value_copy == NULL)
-        return (0);
-
-    index = key_index((const unsigned char *)key, ht->size);
-    for (i = index; ht->array[i]; i++)
+    for (i = 0; i < ht->size; i++)
     {
-        if (strcmp(ht->array[i]->key, key) == 0)
+        current = ht->array[i];
+        while (current != NULL)
         {
-            free(ht->array[i]->value);
-            ht->array[i]->value = value_copy;
-            return (1);
+            temp = current;
+            current = current->next;
+            free(temp->key);
+            free(temp->value);
+            free(temp);
         }
     }
 
-    new_node = create_node(key, value);
-    if (new_node == NULL)
-    {
-        free(value_copy);
-        return (0);
-    }
-
-    nindex(ht, new_node, index);
-    return (1);
+    free(ht->array);
+    free(ht);
 }

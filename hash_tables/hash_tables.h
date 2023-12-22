@@ -29,7 +29,7 @@ typedef struct hash_node_s
 typedef struct hash_table_s
 {
     unsigned long int size;
-    hash_node_t **array;
+    struct hash_node_s **array;
 } hash_table_t;
 
 /* Function prototypes */
