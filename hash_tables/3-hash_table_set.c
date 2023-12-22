@@ -36,7 +36,7 @@ hash_node_t *create_node(const char *key, const char *value)
 }
 
 /**
- * insert_node_at_index - Inserts a node at a given index in the hash table.
+ * nindex - Inserts a node at a given index in the hash table.
  * @ht: The hash table.
  * @new_node: The node to insert.
  * @index: The index at which to insert the node.
